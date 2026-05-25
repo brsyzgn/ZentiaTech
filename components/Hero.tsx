@@ -3,8 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, ChevronDown } from "lucide-react";
-
-const HERO_VIDEO_SRC = "/videos/Z.mp4";
+import { HERO_POSTER_SRC, HERO_VIDEO_SRC } from "@/lib/site-assets";
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -23,13 +22,15 @@ export default function Hero() {
     const video = videoRef.current;
     if (!video) return;
 
+    video.load();
+
     const onReady = async () => {
       setVideoReady(true);
       setVideoFailed(false);
       try {
         await video.play();
       } catch {
-        // Autoplay blocked — video still visible on first frame
+        // Autoplay engellendi — poster görünür kalır
       }
     };
 
@@ -38,14 +39,12 @@ export default function Hero() {
       setVideoReady(false);
     };
 
-    video.addEventListener("loadeddata", onReady);
-    video.addEventListener("canplay", onReady);
+    video.addEventListener("canplay", onReady, { once: true });
     video.addEventListener("error", onError);
 
-    if (video.readyState >= 2) onReady();
+    if (video.readyState >= 3) onReady();
 
     return () => {
-      video.removeEventListener("loadeddata", onReady);
       video.removeEventListener("canplay", onReady);
       video.removeEventListener("error", onError);
     };
@@ -57,32 +56,45 @@ export default function Hero() {
     <section
       id="hero"
       ref={sectionRef}
-      className="relative min-h-screen overflow-hidden"
+      className="relative min-h-screen min-h-[100dvh] overflow-hidden"
     >
-      {/* Gradient fallback — video yüklenene veya hata olana kadar */}
-      <div
-        className={`hero-gradient-fallback absolute inset-0 transition-opacity duration-700 ${
+      {/* Poster — video gelene kadar anında görünür */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={HERO_POSTER_SRC}
+        alt=""
+        fetchPriority="high"
+        decoding="async"
+        aria-hidden
+        className={`hero-video absolute inset-0 h-full w-full object-cover transition-opacity duration-500 md:object-cover max-md:object-contain ${
           showVideo ? "opacity-0" : "opacity-100"
+        }`}
+      />
+
+      <div
+        className={`hero-gradient-fallback absolute inset-0 transition-opacity duration-500 ${
+          showVideo ? "opacity-0" : "opacity-40 max-md:opacity-100"
         }`}
         aria-hidden={showVideo}
       />
 
-      {/* Video her zaman DOM'da — böylece yüklenebilir */}
-      <video
-        ref={videoRef}
-        src={HERO_VIDEO_SRC}
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="auto"
-        aria-label="ZentiaTech kurumsal yazılım geliştirme ve teknoloji çözümleri tanıtım videosu"
-        className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${
-          showVideo ? "opacity-100" : "opacity-0"
-        }`}
-      />
+      <div className="absolute inset-0 overflow-hidden bg-[#0b1f3a] md:bg-transparent">
+        <video
+          ref={videoRef}
+          src={HERO_VIDEO_SRC}
+          poster={HERO_POSTER_SRC}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          aria-label="ZentiaTech kurumsal yazılım geliştirme ve teknoloji çözümleri tanıtım videosu"
+          className={`hero-video absolute inset-0 h-full w-full transition-opacity duration-500 ${
+            showVideo ? "opacity-100" : "opacity-0"
+          }`}
+        />
+      </div>
 
-      {/* Alt kısımda videoya yumuşak beyaz geçiş */}
       <div
         className="pointer-events-none absolute right-0 bottom-0 left-0 z-[6] h-[50%] bg-gradient-to-t from-white via-white/45 to-transparent sm:h-[48%]"
         aria-hidden
