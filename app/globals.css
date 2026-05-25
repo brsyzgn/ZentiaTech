@@ -104,17 +104,10 @@ section[id] {
   );
 }
 
-/* Hero video: mobilde kesilmeden sığsın, masaüstünde tam ekran */
+/* Hero video: tüm ekranlarda arka plan gibi tam kaplar */
 .hero-video {
-  object-fit: contain;
+  object-fit: cover;
   object-position: center center;
-}
-
-@media (min-width: 768px) {
-  .hero-video {
-    object-fit: cover;
-    object-position: center center;
-  }
 }
 
 .section-padding {

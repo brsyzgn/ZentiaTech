@@ -66,19 +66,19 @@ export default function Hero() {
         fetchPriority="high"
         decoding="async"
         aria-hidden
-        className={`hero-video absolute inset-0 h-full w-full object-cover transition-opacity duration-500 md:object-cover max-md:object-contain ${
+        className={`hero-video absolute inset-0 h-full w-full transition-opacity duration-500 ${
           showVideo ? "opacity-0" : "opacity-100"
         }`}
       />
 
       <div
         className={`hero-gradient-fallback absolute inset-0 transition-opacity duration-500 ${
-          showVideo ? "opacity-0" : "opacity-40 max-md:opacity-100"
+          showVideo ? "opacity-0" : "opacity-40"
         }`}
         aria-hidden={showVideo}
       />
 
-      <div className="absolute inset-0 overflow-hidden bg-[#0b1f3a] md:bg-transparent">
+      <div className="absolute inset-0 overflow-hidden">
         <video
           ref={videoRef}
           src={HERO_VIDEO_SRC}
