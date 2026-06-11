@@ -90,6 +90,13 @@ export function buildMetadata(key: keyof typeof pageMeta): Metadata {
     authors: [{ name: siteConfig.name }],
     creator: siteConfig.name,
     metadataBase: new URL(siteConfig.url),
+    icons: {
+      icon: [
+        { url: "/favicon.ico", sizes: "any" },
+        { url: "/icon.png", type: "image/png", sizes: "32x32" },
+      ],
+      apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
+    },
     alternates: {
       canonical: url,
     },
