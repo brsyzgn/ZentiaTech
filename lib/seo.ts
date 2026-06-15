@@ -82,6 +82,7 @@ export const pageMeta: Record<string, PageMeta> = {
 export function buildMetadata(key: keyof typeof pageMeta): Metadata {
   const page = pageMeta[key];
   const url = `${siteConfig.url}${page.path}`;
+  const iconBase = siteConfig.url;
 
   return {
     title: page.title,
@@ -92,13 +93,18 @@ export function buildMetadata(key: keyof typeof pageMeta): Metadata {
     metadataBase: new URL(siteConfig.url),
     icons: {
       icon: [
-        { url: "/favicon.ico", sizes: "any" },
-        { url: "/icon.png", type: "image/png", sizes: "96x96" },
-        { url: "/apple-icon.png", type: "image/png", sizes: "180x180" },
+        { url: `${iconBase}/icon.png`, type: "image/png", sizes: "96x96" },
+        { url: `${iconBase}/favicon.ico`, sizes: "48x48" },
       ],
-      shortcut: "/favicon.ico",
-      apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
+      apple: [
+        {
+          url: `${iconBase}/apple-icon.png`,
+          sizes: "180x180",
+          type: "image/png",
+        },
+      ],
     },
+    manifest: "/manifest.webmanifest",
     alternates: {
       canonical: url,
     },
