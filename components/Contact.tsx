@@ -36,7 +36,7 @@ export default function Contact({
           <SectionHeading
             tag="İletişim"
             title="Projenizi Dijital Ürüne Dönüştürelim"
-            description="ZentiaTech ile profesyonel yazılım çözümünüzü planlayın. Web, e-ticaret, yapay zeka, mobil uygulama ve özel yazılım ihtiyaçlarınız için bizimle iletişime geçin."
+            description="ZentiaTech (Zentia Tech) ile profesyonel yazılım çözümünüzü planlayın. Web, e-ticaret, yapay zeka, mobil uygulama ve özel yazılım ihtiyaçlarınız için bizimle iletişime geçin."
           />
         ) : (
           <h2 className="sr-only">İletişim Formu</h2>

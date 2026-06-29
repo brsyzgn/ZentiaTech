@@ -24,7 +24,7 @@ export default function BrandLogo({
     // eslint-disable-next-line @next/next/no-img-element
     <img
       src={LOGO_SRC}
-      alt="ZentiaTech"
+      alt="ZentiaTech (Zentia Tech) logo"
       width={204}
       height={50}
       className={`block bg-transparent ${sizeClasses[size]} ${

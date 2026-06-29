@@ -235,7 +235,13 @@ export default function WhyUs() {
             Neden ZentiaTech
           </span>
 
-          <h2 className="text-3xl font-bold tracking-tight text-navy sm:text-4xl lg:text-[2.75rem] lg:leading-tight">
+          <p className="mt-4 text-base leading-relaxed text-soft-navy/75 sm:text-lg">
+            At ZentiaTech, we build modern software solutions. Zentia Tech
+            provides web and mobile development with a focus on performance,
+            security, and long-term support.
+          </p>
+
+          <h2 className="mt-2 text-3xl font-bold tracking-tight text-navy sm:text-4xl lg:text-[2.75rem] lg:leading-tight">
             ZentiaTech ile Daha Güçlü Dijital Altyapılar
           </h2>
 

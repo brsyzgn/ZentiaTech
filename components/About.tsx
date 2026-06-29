@@ -33,7 +33,7 @@ export default function About({
           <SectionHeading
             tag="Hakkımızda"
             title="Dijital Dönüşümün Güvenilir Ortağı"
-            description="ZentiaTech, kurumsal web tasarım ve özel yazılım çözümleriyle işletmelerin dijital dönüşüm yolculuğunda güvenilir teknoloji partneridir."
+            description="ZentiaTech (Zentia Tech), kurumsal web tasarım ve özel yazılım çözümleriyle işletmelerin dijital dönüşüm yolculuğunda güvenilir teknoloji partneridir."
           />
         ) : (
           <h2 className="sr-only">Dijital Dönüşümün Güvenilir Ortağı</h2>
@@ -42,14 +42,13 @@ export default function About({
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
           <motion.div variants={slideInLeft} {...reveal}>
             <p className="text-base leading-relaxed text-soft-navy/80 sm:text-lg">
-              ZentiaTech, profesyonel web sitesi geliştirme, e-ticaret sitesi
-              kurulumu, yapay zeka destekli yazılım, mobil uygulama geliştirme
-              ve UI UX tasarım alanlarında uçtan uca hizmet veren bir yazılım
-              şirketidir. Kurumsal müşterilerimize ölçeklenebilir, güvenli ve
-              sürdürülebilir teknoloji çözümleri sunarak dijital dönüşüm
-              hedeflerini ölçülebilir sonuçlara dönüştürüyoruz. Oyun
-              geliştirme ve interaktif deneyim projelerimiz ise ZentiaGame
-              markası altında yürütülür.
+              ZentiaTech (Zentia Tech), profesyonel web sitesi geliştirme,
+              e-ticaret sitesi kurulumu, yapay zeka destekli yazılım, mobil
+              uygulama geliştirme ve UI UX tasarım alanlarında uçtan uca hizmet
+              veren bir yazılım şirketidir. Zentia Tech olarak kurumsal
+              müşterilerimize ölçeklenebilir, güvenli ve sürdürülebilir
+              teknoloji çözümleri sunuyoruz. Oyun geliştirme ve interaktif
+              deneyim projelerimiz ZentiaGame markası altında yürütülür.
             </p>
 
             <ul className="mt-8 space-y-4">

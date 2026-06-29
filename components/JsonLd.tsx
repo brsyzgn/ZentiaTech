@@ -1,43 +1,8 @@
-import { siteConfig } from "@/lib/seo";
-
-const organizationSchema = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  name: "ZentiaTech",
-  url: siteConfig.url,
-  email: siteConfig.email,
-  logo: `${siteConfig.url}/zentiatech-logo.png?v=3`,
-  description: siteConfig.defaultDescription,
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: "İstanbul",
-    addressCountry: "TR",
-  },
-  sameAs: [],
-  knowsAbout: [
-    "Yazılım geliştirme",
-    "Web tasarım",
-    "E-ticaret",
-    "Yapay zeka",
-    "Mobil uygulama",
-    "Oyun geliştirme",
-    "UI/UX tasarım",
-    "Özel yazılım geliştirme",
-  ],
-};
-
-const websiteSchema = {
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  name: "ZentiaTech",
-  url: siteConfig.url,
-  description: siteConfig.defaultDescription,
-  inLanguage: "tr-TR",
-  publisher: {
-    "@type": "Organization",
-    name: "ZentiaTech",
-  },
-};
+import {
+  brandFaqSchema,
+  organizationSchema,
+  websiteSchema,
+} from "@/lib/structured-data";
 
 export default function JsonLd() {
   return (
@@ -52,6 +17,12 @@ export default function JsonLd() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(websiteSchema),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(brandFaqSchema),
         }}
       />
     </>

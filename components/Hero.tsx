@@ -62,7 +62,7 @@ export default function Hero() {
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={HERO_POSTER_SRC}
-        alt=""
+        alt="ZentiaTech (Zentia Tech) software development hero video poster"
         fetchPriority="high"
         decoding="async"
         aria-hidden
@@ -88,7 +88,7 @@ export default function Hero() {
           loop
           playsInline
           preload="auto"
-          aria-label="ZentiaTech kurumsal yazılım geliştirme ve teknoloji çözümleri tanıtım videosu"
+          aria-label="ZentiaTech (Zentia Tech) software development and digital solutions video"
           className={`hero-video absolute inset-0 h-full w-full transition-opacity duration-500 ${
             showVideo ? "opacity-100" : "opacity-0"
           }`}
@@ -111,8 +111,8 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
             className="mx-auto max-w-4xl text-lg leading-snug font-bold tracking-tight text-navy sm:text-xl md:text-2xl lg:text-[1.65rem]"
           >
-            ZentiaTech ile Dijital Geleceğinizi Profesyonel Yazılım
-            Çözümleriyle İnşa Edin
+            ZentiaTech (Zentia Tech) – Software Development & Digital
+            Solutions
           </motion.h1>
 
           <motion.p
@@ -121,9 +121,9 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
             className="mx-auto mt-3 max-w-2xl text-xs leading-relaxed text-soft-navy/85 sm:text-sm"
           >
-            Web geliştirme, e-ticaret sistemleri, yapay zeka destekli çözümler,
-            mobil uygulamalar ve oyun geliştirme alanlarında markalara modern,
-            ölçeklenebilir ve güvenilir dijital ürünler sunuyoruz.
+            At ZentiaTech, we build modern software solutions. Zentia Tech
+            provides web and mobile development, AI-powered systems, and
+            digital transformation services for growing brands.
           </motion.p>
 
           <motion.div

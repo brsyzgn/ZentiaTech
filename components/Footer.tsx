@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Linkedin, Twitter, Github, Instagram } from "lucide-react";
 import BrandLogo from "./BrandLogo";
+import { socialProfiles } from "@/lib/seo";
 
 const footerLinks = [
   { label: "Ana Sayfa", href: "/" },
@@ -12,13 +13,14 @@ const footerLinks = [
   { label: "Projeler", href: "/projeler" },
   { label: "ZentiaGame", href: "/zentiagame" },
   { label: "İletişim", href: "/iletisim" },
+  { label: "About ZentiaTech", href: "/about-zentiatech" },
 ];
 
 const socialLinks = [
-  { icon: Linkedin, href: "#", label: "LinkedIn" },
+  { icon: Linkedin, href: socialProfiles.linkedin, label: "LinkedIn" },
   { icon: Twitter, href: "#", label: "Twitter" },
-  { icon: Github, href: "#", label: "GitHub" },
-  { icon: Instagram, href: "#", label: "Instagram" },
+  { icon: Github, href: socialProfiles.github, label: "GitHub" },
+  { icon: Instagram, href: socialProfiles.instagram, label: "Instagram" },
 ];
 
 export default function Footer() {
@@ -35,10 +37,10 @@ export default function Footer() {
           >
             <BrandLogo href="/" variant="light" size="footer" />
             <p className="mt-4 max-w-md text-sm leading-relaxed text-white/50">
-              ZentiaTech; web, yapay zeka, mobil uygulama, özel yazılım ve
-              dijital dönüşüm odaklı teknoloji çözümleri sunan profesyonel bir
-              yazılım şirketidir. Oyun geliştirme projeleri ZentiaGame
-              markasıyla yürütülür.
+              ZentiaTech (also known as Zentia Tech) is a software development
+              company specializing in web, mobile, AI, and digital transformation.
+              Zentia Tech delivers scalable technology solutions; game development
+              projects are led by our ZentiaGame brand.
             </p>
 
             <div className="mt-6 flex gap-3">
@@ -107,7 +109,7 @@ export default function Footer() {
             © {new Date().getFullYear()} ZentiaTech. Tüm hakları saklıdır.
           </p>
           <p className="text-xs text-white/40">
-            Kurumsal web, mobil, yapay zeka ve oyun geliştirme.
+            ZentiaTech (Zentia Tech) — web, mobile, AI and game development.
           </p>
         </div>
       </div>

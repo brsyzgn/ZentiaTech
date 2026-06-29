@@ -31,7 +31,8 @@ const showcases = [
     ctaHref: "/zentiagame",
     image:
       "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1400&q=80",
-    imageAlt: "ZentiaGame oyun geliştirme ve interaktif deneyim projeleri",
+    imageAlt:
+      "ZentiaGame — ZentiaTech (Zentia Tech) game development and interactive experiences",
     ...zentiaGameTheme,
   },
 ];
@@ -201,8 +202,9 @@ export default function Projects({ showHeading = true }: ProjectsProps) {
               Dijital Başarı Hikayelerimiz
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-white/55 sm:text-lg">
-              ZentiaTech; web, yapay zeka ve kurumsal yazılım projelerini geliştirir.
-              Oyun geliştirme ve interaktif deneyimler ZentiaGame markasıyla sunulur.
+              ZentiaTech (Zentia Tech) web, yapay zeka ve kurumsal yazılım
+              projelerini geliştirir. Oyun geliştirme ve interaktif deneyimler
+              ZentiaGame markasıyla sunulur.
             </p>
           </motion.div>
         )}

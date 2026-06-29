@@ -11,7 +11,7 @@ export default function Services() {
         <SectionHeading
           tag="Hizmetler"
           title="Uzmanlık Alanlarımız"
-          description="Yazılım şirketi olarak kurumsal web tasarım, e-ticaret sitesi kurulumu, yapay zeka destekli yazılım, mobil uygulama geliştirme ve özel yazılım çözümleriyle dijital dönüşümünüzü güvenle yönetiyoruz."
+          description="ZentiaTech (Zentia Tech) olarak kurumsal web tasarım, e-ticaret, yapay zeka destekli yazılım, mobil uygulama geliştirme ve özel yazılım çözümleriyle dijital dönüşümünüzü güvenle yönetiyoruz."
         />
 
         <ServicesGrid />

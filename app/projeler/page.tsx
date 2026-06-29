@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import PageShell from "@/components/PageShell";
 import PageHeader from "@/components/PageHeader";
+import PageStructuredData from "@/components/PageStructuredData";
 import Projects from "@/components/Projects";
 import { buildMetadata } from "@/lib/seo";
 
@@ -10,9 +11,15 @@ export const metadata: Metadata = buildMetadata("projeler");
 export default function ProjelerPage() {
   return (
     <PageShell>
+      <PageStructuredData
+        breadcrumbs={[
+          { name: "Ana Sayfa", path: "/" },
+          { name: "Projeler", path: "/projeler" },
+        ]}
+      />
       <PageHeader
-        title="Dijital Başarı Hikayelerimiz"
-        description="ZentiaTech; kurumsal yazılım, profesyonel web sitesi, yapay zeka uygulamaları ve özel yazılım çözümleri geliştirir. Oyun ve interaktif deneyim projeleri ZentiaGame markasıyla yürütülür."
+        title="ZentiaTech & Zentia Tech Projeleri"
+        description="ZentiaTech (Zentia Tech) kurumsal yazılım, profesyonel web sitesi, yapay zeka uygulamaları ve özel yazılım çözümleri geliştirir."
       />
       <section className="bg-white py-12">
         <div className="container-custom max-w-3xl">

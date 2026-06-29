@@ -3,19 +3,28 @@ import { siteConfig } from "@/lib/seo";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = siteConfig.url;
-  const routes = [
-    "",
-    "/hakkimizda",
-    "/hizmetler",
-    "/projeler",
-    "/zentiagame",
-    "/iletisim",
+  const routes: {
+    path: string;
+    changeFrequency: "weekly" | "monthly";
+    priority: number;
+  }[] = [
+    { path: "", changeFrequency: "weekly", priority: 1 },
+    { path: "/about-zentiatech", changeFrequency: "monthly", priority: 0.95 },
+    { path: "/about", changeFrequency: "monthly", priority: 0.9 },
+    { path: "/services", changeFrequency: "monthly", priority: 0.9 },
+    { path: "/contact", changeFrequency: "monthly", priority: 0.85 },
+    { path: "/careers", changeFrequency: "monthly", priority: 0.8 },
+    { path: "/hakkimizda", changeFrequency: "monthly", priority: 0.85 },
+    { path: "/hizmetler", changeFrequency: "monthly", priority: 0.9 },
+    { path: "/projeler", changeFrequency: "monthly", priority: 0.85 },
+    { path: "/zentiagame", changeFrequency: "monthly", priority: 0.8 },
+    { path: "/iletisim", changeFrequency: "monthly", priority: 0.85 },
   ];
 
-  return routes.map((route) => ({
-    url: `${base}${route}`,
+  return routes.map(({ path, changeFrequency, priority }) => ({
+    url: `${base}${path}`,
     lastModified: new Date(),
-    changeFrequency: route === "" ? "weekly" : "monthly",
-    priority: route === "" ? 1 : 0.8,
+    changeFrequency,
+    priority,
   }));
 }

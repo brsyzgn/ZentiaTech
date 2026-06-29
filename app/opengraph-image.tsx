@@ -28,7 +28,7 @@ export default function OpenGraphImage() {
             letterSpacing: "-0.02em",
           }}
         >
-          ZentiaTech
+          ZentiaTech | Zentia Tech
         </div>
         <div
           style={{
@@ -39,7 +39,7 @@ export default function OpenGraphImage() {
             lineHeight: 1.4,
           }}
         >
-          Web, E-Ticaret, Yapay Zeka ve Oyun Geliştirme
+          Software Development, Web, Mobile, AI &amp; Digital Solutions
         </div>
       </div>
     ),

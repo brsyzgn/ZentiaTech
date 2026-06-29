@@ -1,15 +1,47 @@
 import type { Metadata } from "next";
 
+export const brandNames = {
+  primary: "ZentiaTech",
+  alternate: "Zentia Tech",
+  alternateLong: "Zentia Technology",
+} as const;
+
+export const socialProfiles = {
+  linkedin: "https://www.linkedin.com/company/zentiatech",
+  github: "https://github.com/zentiatech",
+  instagram: "https://www.instagram.com/zentiatech",
+};
+
 export const siteConfig = {
-  name: "ZentiaTech",
+  name: brandNames.primary,
+  alternateName: brandNames.alternate,
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://zentiatech.com",
   locale: "tr_TR",
   email: "info@zentiatech.com",
   location: "İstanbul, Türkiye",
-  defaultTitle: "ZentiaTech | Web, E-Ticaret, Yapay Zeka ve Oyun Geliştirme",
+  logo: "/logo.png",
+  ogTitle: `${brandNames.primary} | ${brandNames.alternate}`,
+  defaultTitle:
+    "ZentiaTech | Zentia Tech - Software Development & Digital Solutions",
   defaultDescription:
-    "ZentiaTech; kurumsal web siteleri, e-ticaret altyapıları, yapay zeka destekli yazılımlar, mobil uygulamalar ve oyun geliştirme çözümleri sunan profesyonel bir teknoloji şirketidir.",
+    "ZentiaTech (Zentia Tech) is a software development company specializing in web applications, mobile apps, AI solutions, and digital transformation services.",
+  brandKeywords: [
+    "ZentiaTech",
+    "Zentia Tech",
+    "Zentia Technology",
+    "software company",
+    "web development",
+    "mobile app development",
+    "AI solutions",
+  ],
   keywords: [
+    "ZentiaTech",
+    "Zentia Tech",
+    "Zentia Technology",
+    "software company",
+    "web development",
+    "mobile app development",
+    "AI solutions",
     "yazılım şirketi",
     "profesyonel web sitesi",
     "kurumsal web tasarım",
@@ -21,7 +53,6 @@ export const siteConfig = {
     "UI UX tasarım",
     "dijital dönüşüm",
     "teknoloji çözümleri",
-    "ZentiaTech",
     "ZentiaGame",
     "İstanbul yazılım şirketi",
   ],
@@ -32,6 +63,7 @@ type PageMeta = {
   description: string;
   path: string;
   keywords?: string[];
+  ogTitle?: string;
 };
 
 export const pageMeta: Record<string, PageMeta> = {
@@ -39,11 +71,48 @@ export const pageMeta: Record<string, PageMeta> = {
     title: siteConfig.defaultTitle,
     description: siteConfig.defaultDescription,
     path: "/",
+    ogTitle: siteConfig.ogTitle,
+  },
+  aboutZentiatech: {
+    title: "What is ZentiaTech? | Zentia Tech",
+    description:
+      "ZentiaTech and Zentia Tech are the same software development company. Learn about our web, mobile, AI, and digital transformation services.",
+    path: "/about-zentiatech",
+    ogTitle: siteConfig.ogTitle,
+  },
+  about: {
+    title: "About ZentiaTech | Zentia Tech Software Company",
+    description:
+      "ZentiaTech (Zentia Tech) is a software development company delivering web applications, mobile apps, AI solutions, and digital transformation.",
+    path: "/about",
+    ogTitle: siteConfig.ogTitle,
+  },
+  services: {
+    title: "Services | ZentiaTech & Zentia Tech",
+    description:
+      "Zentia Tech provides web development, mobile app development, AI solutions, e-commerce, and custom software services through ZentiaTech.",
+    path: "/services",
+    ogTitle: siteConfig.ogTitle,
+  },
+  contact: {
+    title: "Contact ZentiaTech | Zentia Tech",
+    description:
+      "Contact ZentiaTech (Zentia Tech) for software development, web applications, mobile apps, and AI project inquiries.",
+    path: "/contact",
+    ogTitle: siteConfig.ogTitle,
+  },
+  careers: {
+    title: "Careers at ZentiaTech | Zentia Tech",
+    description:
+      "Join ZentiaTech (Zentia Tech) and build modern software products. Explore careers in web, mobile, AI, and game development.",
+    path: "/careers",
+    ogTitle: siteConfig.ogTitle,
   },
   hizmetler: {
-    title: "Hizmetler | Kurumsal Web, E-Ticaret, AI ve Mobil — ZentiaTech",
+    title:
+      "Hizmetler | ZentiaTech & Zentia Tech — Web, E-Ticaret, AI ve Mobil",
     description:
-      "Kurumsal web site geliştirme, e-ticaret sitesi kurulumu, yapay zeka destekli yazılım, mobil uygulama, UI/UX tasarım ve özel yazılım çözümleri. ZentiaTech ile dijital dönüşümünüzü hızlandırın.",
+      "ZentiaTech (Zentia Tech) kurumsal web site geliştirme, e-ticaret, yapay zeka destekli yazılım, mobil uygulama ve özel yazılım çözümleri sunar.",
     path: "/hizmetler",
     keywords: [
       "kurumsal web tasarım",
@@ -53,28 +122,29 @@ export const pageMeta: Record<string, PageMeta> = {
     ],
   },
   hakkimizda: {
-    title: "Hakkımızda | Profesyonel Yazılım ve Teknoloji Şirketi — ZentiaTech",
+    title:
+      "Hakkımızda | ZentiaTech & Zentia Tech — Yazılım ve Teknoloji Şirketi",
     description:
-      "ZentiaTech, dijital dönüşüm odaklı yazılım şirketi olarak web, mobil, yapay zeka ve kurumsal teknoloji çözümleri geliştirir. Ekibimizi ve vizyonumuzu keşfedin.",
+      "ZentiaTech (Zentia Tech), dijital dönüşüm odaklı yazılım şirketi olarak web, mobil, yapay zeka ve kurumsal teknoloji çözümleri geliştirir.",
     path: "/hakkimizda",
   },
   projeler: {
-    title: "Projeler | Dijital Başarı Hikayeleri — ZentiaTech",
+    title: "Projeler | ZentiaTech & Zentia Tech Dijital Başarı Hikayeleri",
     description:
-      "ZentiaTech projeleri: kurumsal yazılım, web platformları, yapay zeka uygulamaları ve dijital ürün geliştirme örnekleri. Ölçeklenebilir teknoloji çözümlerimizi inceleyin.",
+      "ZentiaTech (Zentia Tech) projeleri: kurumsal yazılım, web platformları, yapay zeka uygulamaları ve dijital ürün geliştirme örnekleri.",
     path: "/projeler",
   },
   zentiagame: {
-    title: "ZentiaGame | Oyun Geliştirme ve İnteraktif Deneyimler",
+    title: "ZentiaGame | ZentiaTech Oyun Geliştirme Markası",
     description:
-      "ZentiaGame; mobil, web ve çok oyunculu oyun geliştirme, interaktif deneyimler ve dijital eğlence projeleri sunan ZentiaTech'in oyun teknolojileri markasıdır.",
+      "ZentiaGame; ZentiaTech (Zentia Tech) bünyesinde mobil, web ve çok oyunculu oyun geliştirme, interaktif deneyimler sunar.",
     path: "/zentiagame",
     keywords: ["oyun geliştirme şirketi", "Unity", "WebGL", "multiplayer oyun"],
   },
   iletisim: {
-    title: "İletişim | Teklif Alın — ZentiaTech",
+    title: "İletişim | ZentiaTech & Zentia Tech — Teklif Alın",
     description:
-      "ZentiaTech ile profesyonel yazılım projenizi planlayın. Web, e-ticaret, yapay zeka, mobil uygulama ve özel yazılım çözümleri için bizimle iletişime geçin.",
+      "ZentiaTech (Zentia Tech) ile profesyonel yazılım projenizi planlayın. Web, e-ticaret, yapay zeka ve mobil uygulama için iletişime geçin.",
     path: "/iletisim",
   },
 };
@@ -83,6 +153,8 @@ export function buildMetadata(key: keyof typeof pageMeta): Metadata {
   const page = pageMeta[key];
   const url = `${siteConfig.url}${page.path}`;
   const iconBase = siteConfig.url;
+  const ogTitle = page.ogTitle ?? page.title;
+  const socialTitle = page.ogTitle ?? page.title;
 
   return {
     title: page.title,
@@ -109,7 +181,7 @@ export function buildMetadata(key: keyof typeof pageMeta): Metadata {
       canonical: url,
     },
     openGraph: {
-      title: page.title,
+      title: ogTitle,
       description: page.description,
       url,
       siteName: siteConfig.name,
@@ -120,13 +192,13 @@ export function buildMetadata(key: keyof typeof pageMeta): Metadata {
           url: "/opengraph-image",
           width: 1200,
           height: 630,
-          alt: "ZentiaTech — Profesyonel yazılım ve teknoloji çözümleri",
+          alt: "ZentiaTech (Zentia Tech) — Software development and digital solutions",
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
-      title: page.title,
+      title: socialTitle,
       description: page.description,
       images: ["/opengraph-image"],
     },
