@@ -14,6 +14,9 @@ const CONTACT_SECTION_ID = "iletisim";
 const navLinks = [
   { label: "Ana Sayfa", href: "/" },
   { label: "Hizmetler", href: "/hizmetler" },
+  { label: "AI", href: "/ai" },
+  { label: "Web", href: "/web" },
+  { label: "Blog", href: "/blog" },
   { label: "Hakkımızda", href: "/hakkimizda" },
   { label: "Projeler", href: "/projeler" },
   { label: "ZentiaGame", href: "/zentiagame" },

@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, Gamepad2, Users, Zap, Box, Layers } from "lucide-react";
-import PageStructuredData from "@/components/PageStructuredData";
+import PageStructuredData, {
+  Breadcrumbs,
+} from "@/components/PageStructuredData";
 import PageShell from "@/components/PageShell";
 import PageHeader from "@/components/PageHeader";
 import { buildMetadata } from "@/lib/seo";
@@ -20,14 +22,22 @@ const features = [
 ];
 
 export default function ZentiaGamePage() {
+  const crumbs = [
+    { name: "Ana Sayfa", path: "/" },
+    { name: "ZentiaGame", path: "/zentiagame" },
+  ];
+
   return (
     <PageShell>
       <PageStructuredData
-        breadcrumbs={[
-          { name: "Ana Sayfa", path: "/" },
-          { name: "ZentiaGame", path: "/zentiagame" },
-        ]}
+        breadcrumbs={crumbs}
+        webPage={{
+          path: "/zentiagame",
+          name: "ZentiaGame | ZentiaTech",
+          description: "ZentiaTech oyun geliştirme markası",
+        }}
       />
+      <Breadcrumbs items={crumbs} />
       <div className="relative overflow-hidden" style={{ backgroundColor: zentiaGameTheme.bg }}>
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_50%_40%_at_50%_0%,rgba(79,70,229,0.12),transparent_60%)]" />
         <div className="pointer-events-none absolute right-0 bottom-0 h-[400px] w-[400px] rounded-full bg-indigo-600/10 blur-[120px]" />

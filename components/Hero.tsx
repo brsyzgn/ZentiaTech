@@ -111,8 +111,7 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
             className="mx-auto max-w-4xl text-lg leading-snug font-bold tracking-tight text-navy sm:text-xl md:text-2xl lg:text-[1.65rem]"
           >
-            ZentiaTech (Zentia Tech) – Software Development & Digital
-            Solutions
+            ZentiaTech | Zentia Tech Software, AI & Digital Solutions
           </motion.h1>
 
           <motion.p
@@ -123,7 +122,7 @@ export default function Hero() {
           >
             At ZentiaTech, we build modern software solutions. Zentia Tech
             provides web and mobile development, AI-powered systems, and
-            digital transformation services for growing brands.
+            digital transformation for growing brands.
           </motion.p>
 
           <motion.div

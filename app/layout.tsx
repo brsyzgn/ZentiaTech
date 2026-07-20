@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import JsonLd from "@/components/JsonLd";
 import ScrollToTop from "@/components/ScrollToTop";
-import { buildMetadata } from "@/lib/seo";
+import { buildMetadata, siteConfig } from "@/lib/seo";
 import "./globals.css";
 
 const inter = Inter({
@@ -11,7 +11,13 @@ const inter = Inter({
   display: "swap",
 });
 
-export const metadata: Metadata = buildMetadata("home");
+export const metadata: Metadata = {
+  ...buildMetadata("home"),
+  title: {
+    default: siteConfig.defaultTitle,
+    template: siteConfig.titleTemplate,
+  },
+};
 
 export default function RootLayout({
   children,
@@ -20,6 +26,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="tr" className={inter.variable}>
+      <head>
+        <link rel="preconnect" href="https://images.unsplash.com" />
+        <link rel="dns-prefetch" href="https://images.unsplash.com" />
+      </head>
       <body className="font-sans antialiased">
         <JsonLd />
         <ScrollToTop />
