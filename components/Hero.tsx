@@ -17,12 +17,19 @@ import { scrollToSection } from "@/lib/scroll";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
-const ORBS = [
+const ORBS: {
+  top: string;
+  left?: string;
+  right?: string;
+  size: number;
+  color: string;
+  delay: number;
+}[] = [
   { top: "12%", left: "8%", size: 180, color: "rgba(56,189,248,0.14)", delay: 0 },
   { top: "58%", left: "4%", size: 120, color: "rgba(167,139,250,0.12)", delay: 1.2 },
   { top: "18%", right: "6%", size: 140, color: "rgba(129,140,248,0.12)", delay: 0.6 },
   { top: "70%", right: "12%", size: 100, color: "rgba(34,211,238,0.1)", delay: 1.8 },
-] as const;
+];
 
 const SPARKS = [
   { x: "18%", y: "22%", delay: 0 },
