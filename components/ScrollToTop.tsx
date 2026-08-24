@@ -23,11 +23,15 @@ export default function ScrollToTop() {
     if (scrollToHash()) return;
 
     scrollPageToTop();
-    const retry = window.setTimeout(() => {
-      if (!scrollToHash()) scrollPageToTop();
-    }, 120);
+    const retries = [80, 220, 500].map((delay) =>
+      window.setTimeout(() => {
+        if (!scrollToHash()) {
+          if (delay === 80) scrollPageToTop();
+        }
+      }, delay)
+    );
 
-    return () => window.clearTimeout(retry);
+    return () => retries.forEach((id) => window.clearTimeout(id));
   }, [pathname]);
 
   useEffect(() => {

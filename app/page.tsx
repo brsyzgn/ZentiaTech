@@ -2,6 +2,7 @@ import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import Services from "@/components/Services";
 import WhyUs from "@/components/WhyUs";
+import ZentiaNexus from "@/components/ZentiaNexus";
 import Projects from "@/components/Projects";
 import About from "@/components/About";
 import Process from "@/components/Process";
@@ -16,6 +17,7 @@ export default function Home() {
         <HeroSection />
         <Services />
         <WhyUs />
+        <ZentiaNexus />
         <Projects />
         <About />
         <Process />

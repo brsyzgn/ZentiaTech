@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
@@ -10,6 +10,7 @@ import { useScrolled } from "@/lib/hooks";
 import { scrollToSection } from "@/lib/scroll";
 
 const CONTACT_SECTION_ID = "iletisim";
+const NEXUS_SECTION_ID = "zentia-nexus";
 
 const navLinks = [
   { label: "Ana Sayfa", href: "/" },
@@ -19,6 +20,11 @@ const navLinks = [
   { label: "Blog", href: "/blog" },
   { label: "Hakkımızda", href: "/hakkimizda" },
   { label: "Projeler", href: "/projeler" },
+  {
+    label: "Zentia Nexus",
+    href: `/#${NEXUS_SECTION_ID}`,
+    sectionId: NEXUS_SECTION_ID,
+  },
   { label: "ZentiaGame", href: "/zentiagame" },
   { label: "İletişim", href: "/iletisim#iletisim" },
 ];
@@ -27,19 +33,44 @@ export default function Navbar() {
   const scrolled = useScrolled(50);
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [hash, setHash] = useState("");
 
-  const isActive = (href: string) => {
+  useEffect(() => {
+    const syncHash = () => setHash(window.location.hash.replace("#", ""));
+    syncHash();
+    window.addEventListener("hashchange", syncHash);
+    return () => window.removeEventListener("hashchange", syncHash);
+  }, [pathname]);
+
+  const isActive = (href: string, sectionId?: string) => {
+    if (sectionId) {
+      return hash === sectionId;
+    }
     const path = href.split("#")[0];
-    return path === "/" ? pathname === "/" : pathname.startsWith(path);
+    if (path === "/") return pathname === "/" && hash !== NEXUS_SECTION_ID;
+    return pathname.startsWith(path);
   };
 
-  const linkClass = (href: string) =>
-    isActive(href)
+  const handleNavClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    sectionId?: string
+  ) => {
+    setMobileOpen(false);
+    if (!sectionId) return;
+    if (document.getElementById(sectionId)) {
+      e.preventDefault();
+      scrollToSection(sectionId);
+      setHash(sectionId);
+    }
+  };
+
+  const linkClass = (href: string, sectionId?: string) =>
+    isActive(href, sectionId)
       ? "text-navy font-semibold after:w-full"
       : "text-navy/70 hover:text-navy after:w-0 hover:after:w-full";
 
-  const mobileLinkClass = (href: string) =>
-    isActive(href)
+  const mobileLinkClass = (href: string, sectionId?: string) =>
+    isActive(href, sectionId)
       ? "bg-navy/8 font-semibold text-navy"
       : "text-navy hover:bg-light-gray";
 
@@ -69,14 +100,15 @@ export default function Navbar() {
       >
         <BrandLogo href="/" variant="dark" />
 
-        <ul className="hidden items-center gap-4 lg:flex lg:gap-5">
+        <ul className="hidden items-center gap-3 lg:flex xl:gap-5">
           {navLinks.map((link) => (
             <li key={link.href}>
               <Link
                 href={link.href}
                 scroll={link.href.includes("#") ? false : undefined}
-                aria-current={isActive(link.href) ? "page" : undefined}
-                className={`relative whitespace-nowrap text-[13px] font-medium transition-colors duration-300 after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:bg-navy after:transition-all after:duration-300 lg:text-sm ${linkClass(link.href)}`}
+                onClick={(e) => handleNavClick(e, link.sectionId)}
+                aria-current={isActive(link.href, link.sectionId) ? "page" : undefined}
+                className={`relative whitespace-nowrap text-[12px] font-medium transition-colors duration-300 after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:bg-navy after:transition-all after:duration-300 xl:text-sm ${linkClass(link.href, link.sectionId)}`}
               >
                 {link.label}
               </Link>
@@ -122,10 +154,10 @@ export default function Navbar() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    scroll
-                    onClick={() => setMobileOpen(false)}
-                    aria-current={isActive(link.href) ? "page" : undefined}
-                    className={`block rounded-lg px-4 py-3 text-sm font-medium transition-colors ${mobileLinkClass(link.href)}`}
+                    scroll={link.href.includes("#") ? false : true}
+                    onClick={(e) => handleNavClick(e, link.sectionId)}
+                    aria-current={isActive(link.href, link.sectionId) ? "page" : undefined}
+                    className={`block rounded-lg px-4 py-3 text-sm font-medium transition-colors ${mobileLinkClass(link.href, link.sectionId)}`}
                   >
                     {link.label}
                   </Link>
