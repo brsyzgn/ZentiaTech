@@ -7,67 +7,55 @@ import {
   motion,
   useMotionTemplate,
   useMotionValue,
-  useScroll,
+  useReducedMotion,
   useSpring,
   useTransform,
 } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, BarChart3, Brain, Globe } from "lucide-react";
 import { HERO_VISUAL_SRC } from "@/lib/site-assets";
 import { scrollToSection } from "@/lib/scroll";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
-const ORBS: {
-  top: string;
-  left?: string;
-  right?: string;
-  size: number;
-  color: string;
-  delay: number;
-}[] = [
-  { top: "12%", left: "8%", size: 180, color: "rgba(56,189,248,0.14)", delay: 0 },
-  { top: "58%", left: "4%", size: 120, color: "rgba(167,139,250,0.12)", delay: 1.2 },
-  { top: "18%", right: "6%", size: 140, color: "rgba(129,140,248,0.12)", delay: 0.6 },
-  { top: "70%", right: "12%", size: 100, color: "rgba(34,211,238,0.1)", delay: 1.8 },
-];
+const FEATURES = [
+  { icon: Globe, category: "Ürün", label: "Web & Mobil" },
+  { icon: Brain, category: "Akıllı", label: "AI Sistemleri" },
+  { icon: BarChart3, category: "Ölçek", label: "Dijital Dönüşüm" },
+] as const;
+
+const ORBS = [
+  { top: "14%", left: "6%", size: 220, color: "rgba(80, 120, 255, 0.14)", delay: 0 },
+  { top: "62%", left: "8%", size: 140, color: "rgba(140, 120, 255, 0.1)", delay: 1.1 },
+  { top: "18%", right: "8%", size: 180, color: "rgba(90, 140, 255, 0.12)", delay: 0.5 },
+  { top: "68%", right: "14%", size: 120, color: "rgba(120, 90, 255, 0.1)", delay: 1.6 },
+] as const;
 
 const SPARKS = [
-  { x: "18%", y: "22%", delay: 0 },
-  { x: "32%", y: "14%", delay: 0.8 },
-  { x: "72%", y: "18%", delay: 1.4 },
-  { x: "86%", y: "34%", delay: 0.4 },
-  { x: "12%", y: "62%", delay: 1.1 },
-  { x: "78%", y: "68%", delay: 1.9 },
-  { x: "48%", y: "78%", delay: 0.55 },
-  { x: "62%", y: "12%", delay: 1.6 },
+  { x: "16%", y: "22%", delay: 0 },
+  { x: "28%", y: "16%", delay: 0.7 },
+  { x: "72%", y: "18%", delay: 1.3 },
+  { x: "88%", y: "36%", delay: 0.4 },
+  { x: "10%", y: "64%", delay: 1.1 },
+  { x: "78%", y: "70%", delay: 1.8 },
+  { x: "46%", y: "78%", delay: 0.55 },
+  { x: "58%", y: "12%", delay: 1.5 },
 ] as const;
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
-
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start start", "end start"],
-  });
-
-  const opacity = useTransform(scrollYProgress, [0, 0.85], [1, 0]);
-  const contentY = useTransform(scrollYProgress, [0, 1], [0, 48]);
-  const visualScrollY = useTransform(scrollYProgress, [0, 1], [0, 100]);
+  const reduceMotion = useReducedMotion();
 
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
-  const springX = useSpring(mouseX, { stiffness: 60, damping: 18 });
-  const springY = useSpring(mouseY, { stiffness: 60, damping: 18 });
+  const springX = useSpring(mouseX, { stiffness: 50, damping: 18 });
+  const springY = useSpring(mouseY, { stiffness: 50, damping: 18 });
 
-  const rotateX = useTransform(springY, [-0.5, 0.5], [8, -8]);
-  const rotateY = useTransform(springX, [-0.5, 0.5], [-10, 10]);
-  const visualParallaxX = useTransform(springX, [-0.5, 0.5], [-18, 18]);
-  const visualParallaxY = useTransform(springY, [-0.5, 0.5], [-12, 12]);
-  const glowX = useTransform(springX, [-0.5, 0.5], ["42%", "58%"]);
-  const glowY = useTransform(springY, [-0.5, 0.5], ["42%", "58%"]);
-  const glowBg = useMotionTemplate`radial-gradient(ellipse 55% 45% at ${glowX} ${glowY}, rgba(56,189,248,0.22), transparent 70%)`;
+  const glowX = useTransform(springX, [-0.5, 0.5], ["68%", "82%"]);
+  const glowY = useTransform(springY, [-0.5, 0.5], ["38%", "56%"]);
+  const glowBg = useMotionTemplate`radial-gradient(ellipse 50% 42% at ${glowX} ${glowY}, rgba(90, 130, 255, 0.16), transparent 70%)`;
 
   const onPointerMove = (e: PointerEvent<HTMLElement>) => {
+    if (reduceMotion) return;
     const rect = sectionRef.current?.getBoundingClientRect();
     if (!rect) return;
     mouseX.set((e.clientX - rect.left) / rect.width - 0.5);
@@ -90,13 +78,18 @@ export default function Hero() {
       ref={sectionRef}
       onPointerMove={onPointerMove}
       onPointerLeave={onPointerLeave}
-      className="hero-stage relative min-h-screen min-h-[100dvh] overflow-hidden"
+      className="hero-stage"
     >
-      <div className="hero-stage-glow pointer-events-none" aria-hidden />
-      <motion.div className="hero-stage-mouse-glow pointer-events-none" style={{ background: glowBg }} aria-hidden />
-      <div className="hero-stage-grid pointer-events-none" aria-hidden />
-      <div className="hero-stage-beams pointer-events-none" aria-hidden />
-      <div className="hero-stage-particles pointer-events-none" aria-hidden />
+      <div className="hero-stage-glow" aria-hidden />
+      {!reduceMotion && (
+        <motion.div
+          className="hero-stage-mouse-glow"
+          style={{ background: glowBg }}
+          aria-hidden
+        />
+      )}
+      <div className="hero-stage-grid" aria-hidden />
+      <div className="hero-stage-particles" aria-hidden />
 
       {ORBS.map((orb, i) => (
         <motion.span
@@ -110,9 +103,13 @@ export default function Hero() {
             height: orb.size,
             background: orb.color,
           }}
-          animate={{ y: [0, -22, 0], scale: [1, 1.08, 1], opacity: [0.55, 0.9, 0.55] }}
+          animate={
+            reduceMotion
+              ? undefined
+              : { y: [0, -18, 0], scale: [1, 1.08, 1], opacity: [0.45, 0.8, 0.45] }
+          }
           transition={{
-            duration: 7 + i,
+            duration: 8 + i,
             delay: orb.delay,
             repeat: Infinity,
             ease: "easeInOut",
@@ -126,9 +123,13 @@ export default function Hero() {
           key={`spark-${i}`}
           className="hero-spark"
           style={{ left: spark.x, top: spark.y }}
-          animate={{ opacity: [0.15, 1, 0.15], scale: [0.7, 1.25, 0.7] }}
+          animate={
+            reduceMotion
+              ? undefined
+              : { opacity: [0.15, 0.9, 0.15], scale: [0.7, 1.25, 0.7], y: [0, -8, 0] }
+          }
           transition={{
-            duration: 2.8 + (i % 3) * 0.4,
+            duration: 2.6 + (i % 3) * 0.4,
             delay: spark.delay,
             repeat: Infinity,
             ease: "easeInOut",
@@ -137,17 +138,14 @@ export default function Hero() {
         />
       ))}
 
-      <motion.div
-        style={{ opacity, y: contentY }}
-        className="relative z-10 mx-auto flex min-h-screen min-h-[100dvh] max-w-7xl flex-col justify-center px-4 pt-24 pb-16 sm:px-6 lg:px-8 lg:pt-20"
-      >
-        <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-6 xl:gap-10">
-          <div className="relative z-10 max-w-xl text-center lg:max-w-none lg:text-left">
+      <div className="hero-inner">
+        <div className="hero-layout">
+          <div className="hero-copy">
             <motion.div
-              initial={{ opacity: 0, y: 18, filter: "blur(8px)" }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              transition={{ duration: 0.7, ease }}
-              className="hero-badge mx-auto inline-flex items-center gap-2 rounded-full border border-cyan-300/20 bg-white/5 px-3.5 py-1.5 text-[11px] font-semibold tracking-[0.18em] text-white/90 uppercase shadow-[0_0_24px_rgba(56,189,248,0.12)] backdrop-blur-md lg:mx-0"
+              initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease }}
+              className="hero-badge"
             >
               <span className="hero-badge-dot" aria-hidden />
               Web • Mobil • AI
@@ -158,23 +156,25 @@ export default function Hero() {
               animate="show"
               variants={{
                 hidden: {},
-                show: { transition: { staggerChildren: 0.08, delayChildren: 0.12 } },
+                show: { transition: { staggerChildren: 0.1, delayChildren: 0.08 } },
               }}
-              className="mt-5 text-3xl leading-[1.12] font-bold tracking-tight text-white sm:text-4xl md:text-5xl lg:text-[3.15rem] xl:text-[3.4rem]"
+              className="hero-title"
             >
               <motion.span
-                className="block"
+                className="hero-title-main"
                 variants={{
-                  hidden: { opacity: 0, y: 28 },
+                  hidden: reduceMotion ? { opacity: 1 } : { opacity: 0, y: 26 },
                   show: { opacity: 1, y: 0, transition: { duration: 0.75, ease } },
                 }}
               >
-                Yazılım, AI ve Dijital Dönüşüm
+                Yazılım, AI ve
+                <br />
+                Dijital Dönüşüm
               </motion.span>
               <motion.span
-                className="hero-gradient-text mt-1 inline-block"
+                className="hero-gradient-text"
                 variants={{
-                  hidden: { opacity: 0, y: 28 },
+                  hidden: reduceMotion ? { opacity: 1 } : { opacity: 0, y: 26 },
                   show: { opacity: 1, y: 0, transition: { duration: 0.8, ease } },
                 }}
               >
@@ -183,138 +183,120 @@ export default function Hero() {
             </motion.h1>
 
             <motion.p
-              initial={{ opacity: 0, y: 22 }}
+              initial={reduceMotion ? false : { opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.75, delay: 0.35, ease }}
-              className="mx-auto mt-5 max-w-lg text-sm leading-relaxed text-white/65 sm:text-base lg:mx-0"
+              transition={{ duration: 0.65, delay: 0.28, ease }}
+              className="hero-description"
             >
               Modern yazılım çözümleri, yapay zeka destekli sistemler ve dijital
               dönüşüm hizmetleriyle markanızı geleceğe taşıyoruz.
             </motion.p>
 
             <motion.div
-              initial={{ opacity: 0, y: 22 }}
+              initial={reduceMotion ? false : { opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.75, delay: 0.48, ease }}
-              className="relative z-30 mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center lg:justify-start"
+              transition={{ duration: 0.65, delay: 0.38, ease }}
+              className="hero-cta-row"
             >
               <Link
                 href="/#iletisim"
                 scroll={false}
                 onClick={goToSection("iletisim")}
-                className="btn-glow hero-cta-primary group inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-white"
+                className="hero-cta-primary group"
               >
                 Teklif Al
                 <ArrowRight
                   size={16}
-                  className="transition-transform group-hover:translate-x-1"
+                  className="transition-transform duration-200 group-hover:translate-x-1"
                   aria-hidden
                 />
               </Link>
               <Link
                 href="/hizmetler"
-                className="btn-glow hero-cta-secondary group inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-white"
+                className="hero-cta-secondary group"
               >
                 Hizmetlerimizi İncele
                 <ArrowRight
                   size={16}
-                  className="transition-transform group-hover:translate-x-1"
+                  className="transition-transform duration-200 group-hover:translate-x-1"
                   aria-hidden
                 />
               </Link>
             </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.85, duration: 0.8 }}
-              className="mt-10 hidden items-center gap-6 text-left sm:flex lg:mt-12"
-            >
-              {[
-                { label: "Web & Mobil", value: "Ürün" },
-                { label: "AI Sistemleri", value: "Akıllı" },
-                { label: "Dijital Dönüşüm", value: "Ölçek" },
-              ].map((item, i) => (
-                <motion.div
-                  key={item.label}
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.95 + i * 0.1, duration: 0.55, ease }}
-                  className="hero-stat"
-                >
-                  <p className="text-[10px] font-semibold tracking-[0.2em] text-cyan-300/70 uppercase">
-                    {item.value}
-                  </p>
-                  <p className="mt-1 text-sm font-medium text-white/80">{item.label}</p>
-                </motion.div>
-              ))}
-            </motion.div>
           </div>
 
           <motion.div
-            style={{ y: visualScrollY, x: visualParallaxX }}
-            initial={{ opacity: 0, scale: 0.9, rotateY: -8 }}
-            animate={{ opacity: 1, scale: 1, rotateY: 0 }}
-            transition={{ duration: 1.05, delay: 0.2, ease }}
-            className="hero-visual-wrap relative mx-auto w-full max-w-md perspective-[1200px] sm:max-w-lg lg:max-w-none"
+            initial={reduceMotion ? false : { opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.18, ease }}
+            className="hero-visual-wrap"
           >
             <div className="hero-visual-glow" aria-hidden />
-            <div className="hero-ring hero-ring-a" aria-hidden />
-            <div className="hero-ring hero-ring-b" aria-hidden />
-            <div className="hero-ring hero-ring-c" aria-hidden />
-
-            <motion.div
-              style={{
-                rotateX,
-                rotateY,
-                y: visualParallaxY,
-                transformStyle: "preserve-3d",
-              }}
-              className="relative"
-            >
-              <motion.div
-                animate={{ y: [0, -14, 0] }}
-                transition={{
-                  repeat: Infinity,
-                  duration: 6,
-                  ease: "easeInOut",
-                }}
-                className="relative"
-              >
-                <div className="hero-visual-frame relative">
-                  <Image
-                    src={HERO_VISUAL_SRC}
-                    alt="ZentiaTech 3D marka görseli"
-                    width={1066}
-                    height={1268}
-                    priority
-                    sizes="(max-width: 1024px) 90vw, 48vw"
-                    className="hero-visual relative z-[1] mx-auto h-auto w-full max-w-[420px] object-contain sm:max-w-[480px] lg:max-w-[560px]"
-                  />
-                  <span className="hero-visual-shine" aria-hidden />
-                </div>
-              </motion.div>
-            </motion.div>
+            <div className="hero-visual-depth" aria-hidden />
+            <div className="hero-visual-float">
+              <Image
+                src={HERO_VISUAL_SRC}
+                alt="ZentiaTech 3D cam Z marka görseli"
+                width={855}
+                height={823}
+                priority
+                sizes="(max-width: 1023px) 80vw, (max-width: 1440px) 42vw, 640px"
+                className="hero-visual"
+              />
+            </div>
           </motion.div>
+
+          <motion.ul
+            initial="hidden"
+            animate="show"
+            variants={{
+              hidden: {},
+              show: { transition: { staggerChildren: 0.12, delayChildren: 0.48 } },
+            }}
+            className="hero-features"
+          >
+            {FEATURES.map((item) => {
+              const Icon = item.icon;
+              return (
+                <motion.li
+                  key={item.label}
+                  className="hero-feature"
+                  variants={{
+                    hidden: reduceMotion ? { opacity: 1 } : { opacity: 0, y: 14 },
+                    show: { opacity: 1, y: 0, transition: { duration: 0.55, ease } },
+                  }}
+                >
+                  <span className="hero-feature-icon" aria-hidden>
+                    <Icon size={16} strokeWidth={1.75} />
+                  </span>
+                  <span>
+                    <span className="hero-feature-category">{item.category}</span>
+                    <span className="hero-feature-label">{item.label}</span>
+                  </span>
+                </motion.li>
+              );
+            })}
+          </motion.ul>
         </div>
 
         <Link
           href="/#hizmetler"
           scroll={false}
           onClick={goToSection("hizmetler")}
-          className="absolute bottom-6 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-1.5 text-white/40 transition-colors hover:text-white/75"
+          className="hero-scroll"
           aria-label="Hizmetler bölümüne kaydır"
         >
           <span className="hero-scroll-mouse" aria-hidden />
           <motion.span
-            animate={{ y: [0, 5, 0], opacity: [0.45, 1, 0.45] }}
+            className="hero-scroll-arrow"
+            aria-hidden
+            animate={reduceMotion ? undefined : { y: [0, 5, 0], opacity: [0.45, 1, 0.45] }}
             transition={{ repeat: Infinity, duration: 1.7, ease: "easeInOut" }}
-            className="text-[10px] tracking-widest uppercase"
           >
             ↓
           </motion.span>
         </Link>
-      </motion.div>
+      </div>
     </section>
   );
 }
