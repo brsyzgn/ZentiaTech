@@ -23,12 +23,19 @@ const FEATURES = [
   { icon: BarChart3, category: "Ölçek", label: "Dijital Dönüşüm" },
 ] as const;
 
-const ORBS = [
+const ORBS: {
+  top: string;
+  left?: string;
+  right?: string;
+  size: number;
+  color: string;
+  delay: number;
+}[] = [
   { top: "14%", left: "6%", size: 220, color: "rgba(80, 120, 255, 0.14)", delay: 0 },
   { top: "62%", left: "8%", size: 140, color: "rgba(140, 120, 255, 0.1)", delay: 1.1 },
   { top: "18%", right: "8%", size: 180, color: "rgba(90, 140, 255, 0.12)", delay: 0.5 },
   { top: "68%", right: "14%", size: 120, color: "rgba(120, 90, 255, 0.1)", delay: 1.6 },
-] as const;
+];
 
 const SPARKS = [
   { x: "16%", y: "22%", delay: 0 },
