@@ -11,6 +11,8 @@ import { scrollToSection } from "@/lib/scroll";
 
 const CONTACT_SECTION_ID = "iletisim";
 const NEXUS_SECTION_ID = "zentia-nexus";
+const DIETIYA_SECTION_ID = "dietiya";
+const PRODUCT_SECTION_IDS = [NEXUS_SECTION_ID, DIETIYA_SECTION_ID];
 
 const navLinks = [
   { label: "Ana Sayfa", href: "/" },
@@ -24,6 +26,11 @@ const navLinks = [
     label: "Zentia Nexus",
     href: `/#${NEXUS_SECTION_ID}`,
     sectionId: NEXUS_SECTION_ID,
+  },
+  {
+    label: "Dietiya",
+    href: `/#${DIETIYA_SECTION_ID}`,
+    sectionId: DIETIYA_SECTION_ID,
   },
   { label: "ZentiaGame", href: "/zentiagame" },
   { label: "İletişim", href: "/iletisim#iletisim" },
@@ -47,7 +54,7 @@ export default function Navbar() {
       return hash === sectionId;
     }
     const path = href.split("#")[0];
-    if (path === "/") return pathname === "/" && hash !== NEXUS_SECTION_ID;
+    if (path === "/") return pathname === "/" && !PRODUCT_SECTION_IDS.includes(hash);
     return pathname.startsWith(path);
   };
 

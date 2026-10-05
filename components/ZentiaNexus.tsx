@@ -1,12 +1,11 @@
 "use client";
 
-import Image from "next/image";
 import { motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
 import { NEXUS_VISUAL_SRC } from "@/lib/site-assets";
 import { fadeInUp } from "@/lib/animations";
 import { getRevealProps } from "@/lib/reveal-motion";
 import SectionHeading from "./SectionHeading";
+import ProductVisualCard from "./ProductVisualCard";
 
 const NEXUS_URL = "https://www.zentianexus.com";
 
@@ -36,37 +35,15 @@ export default function ZentiaNexus() {
           description="Proje ve ekip yönetim platformu. Ekipler, yöneticiler ve paydaşlar için görev, ilerleme ve kararları tek merkezden yönetin."
         />
 
-        <motion.div
-          variants={fadeInUp}
-          {...getRevealProps(false)}
-          className="mx-auto max-w-3xl"
-        >
-          <div className="relative overflow-hidden rounded-3xl border border-navy/10 bg-white shadow-xl shadow-navy/10">
-            <Image
-              src={NEXUS_VISUAL_SRC}
-              alt="Zentia Nexus proje ve ekip yönetim platformu. Projelerinizi, ekiplerinizi ve kararlarınızı tek merkezden yönetin."
-              width={1024}
-              height={682}
-              sizes="(max-width: 768px) 100vw, 768px"
-              className="h-auto w-full"
-            />
-            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-navy/55 via-navy/20 to-transparent" />
-            <div className="absolute inset-x-0 bottom-0 flex justify-center p-4 sm:p-6">
-              <a
-                href={NEXUS_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-glow group/btn inline-flex items-center gap-2 rounded-full bg-[#5B5CE2] px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-[#5B5CE2]/40 transition-all duration-300 hover:bg-[#4F50D4] hover:shadow-xl"
-              >
-                Zentia Nexus’u keşfet
-                <ArrowUpRight
-                  size={16}
-                  className="transition-transform duration-300 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5"
-                  aria-hidden
-                />
-              </a>
-            </div>
-          </div>
+        <motion.div variants={fadeInUp} {...getRevealProps(false)}>
+          <ProductVisualCard
+            src={NEXUS_VISUAL_SRC}
+            alt="Zentia Nexus proje ve ekip yönetim platformu. Projelerinizi, ekiplerinizi ve kararlarınızı tek merkezden yönetin."
+            href={NEXUS_URL}
+            cta="Zentia Nexus’u keşfet"
+            overlayClassName="bg-gradient-to-t from-navy/55 via-navy/20 to-transparent"
+            buttonClassName="bg-[#5B5CE2] shadow-[#5B5CE2]/40 hover:bg-[#4F50D4]"
+          />
         </motion.div>
       </div>
     </section>

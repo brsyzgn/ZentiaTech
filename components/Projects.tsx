@@ -14,6 +14,7 @@ import {
 import { staggerContainer, fadeInUp } from "@/lib/animations";
 import { getRevealProps } from "@/lib/reveal-motion";
 import { zentiaGameTheme } from "@/lib/zentiagame-theme";
+import { PRODUCT_CARD_FRAME } from "./ProductVisualCard";
 
 const showcases = [
   {
@@ -56,7 +57,7 @@ function ShowcaseCard({
       variants={fadeInUp}
       whileHover={{ scale: 1.02, y: -6 }}
       transition={{ type: "spring", stiffness: 300, damping: 24 }}
-      className="group relative min-h-[520px] overflow-hidden rounded-3xl border border-white/[0.08] bg-[rgba(15,23,42,0.75)] shadow-2xl backdrop-blur-xl lg:min-h-[560px]"
+      className={`group ${PRODUCT_CARD_FRAME} border border-white/[0.08] bg-[rgba(15,23,42,0.75)] shadow-2xl backdrop-blur-xl`}
     >
       {/* Hover glow border */}
       <div
@@ -85,7 +86,7 @@ function ShowcaseCard({
       <div className="pointer-events-none absolute top-20 right-20 hidden h-14 w-24 rounded-lg border border-white/10 bg-white/5 backdrop-blur-md opacity-40 transition-all duration-700 group-hover:translate-x-1 group-hover:opacity-60 sm:block" />
 
       {/* Content */}
-      <div className="relative flex h-full min-h-[520px] flex-col justify-between p-6 sm:p-8 lg:min-h-[560px] lg:p-10">
+      <div className="relative flex h-full flex-col justify-between p-5 sm:p-6 lg:p-8">
         <div>
           <span
             className="inline-block rounded-full border px-3 py-1 text-[11px] font-semibold tracking-wide uppercase backdrop-blur-md"
@@ -98,15 +99,15 @@ function ShowcaseCard({
             {project.badge}
           </span>
 
-          <div className="mt-6 flex items-center gap-3">
+          <div className="mt-4 flex items-center gap-3 sm:mt-5">
             <Gamepad2 size={32} className="text-white/90" strokeWidth={1.25} />
-            <h3 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+            <h3 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
               {project.name}
             </h3>
           </div>
         </div>
 
-        <div className="mt-8 rounded-2xl border border-white/10 bg-white/[0.06] p-5 backdrop-blur-xl transition-all duration-500 group-hover:border-white/20 group-hover:bg-white/[0.09] sm:p-6">
+        <div className="mt-5 rounded-2xl border border-white/10 bg-white/[0.06] p-4 backdrop-blur-xl transition-all duration-500 group-hover:border-white/20 group-hover:bg-white/[0.09] sm:mt-6 sm:p-5">
           <p className="text-sm leading-relaxed text-white/70 sm:text-base">
             {project.description}
           </p>
@@ -212,7 +213,7 @@ export default function Projects({ showHeading = true }: ProjectsProps) {
         <motion.div
           variants={staggerContainer}
           {...reveal}
-          className="mx-auto max-w-3xl"
+          className="mx-auto w-full max-w-4xl"
         >
           {showcases.map((project) => (
             <ShowcaseCard key={project.name} project={project} />

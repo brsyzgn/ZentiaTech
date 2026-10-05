@@ -6,6 +6,7 @@ import PageStructuredData, {
   Breadcrumbs,
 } from "@/components/PageStructuredData";
 import ZentiaNexus from "@/components/ZentiaNexus";
+import Dietiya from "@/components/Dietiya";
 import Projects from "@/components/Projects";
 import { buildMetadata } from "@/lib/seo";
 
@@ -54,6 +55,7 @@ export default function ProjelerPage() {
         </div>
       </section>
       <ZentiaNexus />
+      <Dietiya />
       <Projects showHeading={false} />
     </PageShell>
   );
