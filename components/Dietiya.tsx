@@ -7,7 +7,7 @@ import { getRevealProps } from "@/lib/reveal-motion";
 import SectionHeading from "./SectionHeading";
 import ProductVisualCard from "./ProductVisualCard";
 
-const DIETIYA_URL = "https://dietiya.com";
+const DIETIYA_URL = "https://dietiya-web-production.up.railway.app/login";
 
 export default function Dietiya() {
   return (
