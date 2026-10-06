@@ -44,6 +44,7 @@ export default function Dietiya() {
             overlayClassName="bg-gradient-to-t from-emerald-950/55 via-emerald-900/20 to-transparent"
             buttonClassName="bg-[#0F7A4A] shadow-[#0F7A4A]/40 hover:bg-[#0C6840]"
             backgroundClassName="bg-[#EEF7F2]"
+            imageClassName="object-contain object-center"
           />
         </motion.div>
       </div>

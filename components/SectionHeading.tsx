@@ -45,7 +45,7 @@ export default function SectionHeading({
       </h2>
       {description && (
         <p
-          className={`mt-4 max-w-2xl text-base leading-relaxed sm:text-lg ${
+          className={`mt-4 max-w-2xl text-pretty text-base leading-relaxed sm:text-lg ${
             align === "center" ? "mx-auto" : ""
           } ${light ? "text-white/70" : "text-soft-navy/80"}`}
         >
